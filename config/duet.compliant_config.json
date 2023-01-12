@@ -1,0 +1,1836 @@
+  {
+    "styles": [
+      {
+        "name": "Intensity2",
+        "title": "CityFlows intensity",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "Number(${attributes.olcs_extrudedHeight}) >= 90",
+                "color('#191970', 0.5)"
+              ],
+              [
+                "Number(${attributes.olcs_extrudedHeight}) >= 80",
+                "color('#800080', 0.5)"
+              ],
+              [
+                "Number(${attributes.olcs_extrudedHeight}) >= 65",
+                "color('#FF0000', 0.5)"
+              ],
+              [
+                "Number(${attributes.olcs_extrudedHeight}) >= 50",
+                "color('#FF8C00', 0.5)"
+              ],
+              [
+                "Number(${attributes.olcs_extrudedHeight}) >= 30",
+                "color('#FFFF00', 0.5)"
+              ],
+              [
+                "Number(${attributes.olcs_extrudedHeight}) >= 20",
+                "color('#7CFC00', 0.5)"
+              ],
+              [
+                "Number(${attributes.olcs_extrudedHeight}) < 20",
+                "color('#006400', 0.5)"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#006400",
+            "title": "intensity: < 20"
+          },
+          {
+            "color": "#7CFC00",
+            "title": "intensity: 20 - 30"
+          },
+          {
+            "color": "#FFFF00",
+            "title": "intensity: 30 - 50"
+          },
+          {
+            "color": "#FF8C00",
+            "title": "intensity: 50 - 65"
+          },
+          {
+            "color": "#FF0000",
+            "title": "intensity: 65 - 80"
+          },
+          {
+            "color": "#800080",
+            "title": "intensity: 80 - 90"
+          },
+          {
+            "color": "#191970",
+            "title": "intensity: > 90"
+          }
+        ]
+      },
+      {
+        "name": "Intensity",
+        "title": "CityFlows intensity",
+        "declarativeStyle": {
+          "show": "Boolean(${attributes.olcs_extrudedHeight}) === true",
+          "color": {
+            "conditions": [
+              [
+                "true",
+                "color('grey',.9)"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "GMNS",
+        "title": "GMNS style",
+        "declarativeStyle": {
+          "defines": {
+            "CAPACITY": "Number(${attributes.capacity}) > 0 ? Number(${attributes.capacity}) : 1.0",
+            "HIGHWAY": "${attributes.facility_type} !== 'undefined' ? String(${attributes.facility_type}) : 'none'"
+          },
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "${HIGHWAY} ==='motorway'",
+                "color('#f7050d',.5)"
+              ],
+              [
+                "${HIGHWAY} ==='primary'",
+                "color('#fabd05',.5)"
+              ],
+              [
+                "${HIGHWAY} ==='secondary'",
+                "color('#d6d309',.5)"
+              ],
+              [
+                "${HIGHWAY} ==='tertiary'",
+                "color('#04b324',.5)"
+              ],
+              [
+                "${HIGHWAY}==='residential'",
+                "color('#656966',.5)"
+              ],
+              [
+                "${HIGHWAY} ==='trunk'",
+                "color('#0a0a0a',.5)"
+              ],
+              [
+                "${HIGHWAY} ==='none'",
+                "color('#0a0a0a',.5)"
+              ],
+              [
+                "true",
+                "color('#0a0a0a',.5)"
+              ]
+            ]
+          },
+          "strokeColor": {
+            "conditions": [
+              [
+                "Number(${attributes.free_speed}) >= 100",
+                "color('#f7050d',.5)"
+              ],
+              [
+                "Number(${attributes.free_speed}) >= 80",
+                "color('#fabd05',.5)"
+              ],
+              [
+                "Number(${attributes.free_speed}) >= 50",
+                "color('#d6d309',.5)"
+              ],
+              [
+                "Number(${attributes.free_speed}) >= 30",
+                "color('#04b324',.5)"
+              ],
+              [
+                "true",
+                "color('#0a0a0a',.5)"
+              ]
+            ]
+          },
+          "labelColor": {
+            "conditions": [
+              [
+                "Number(${attributes.free_speed}) >= 100",
+                "color('#f7050d',.5)"
+              ],
+              [
+                "Number(${attributes.free_speed}) >= 80",
+                "color('#fabd05',.5)"
+              ],
+              [
+                "Number(${attributes.free_speed}) >= 50",
+                "color('#d6d309',.5)"
+              ],
+              [
+                "Number(${attributes.free_speed}) >= 30",
+                "color('#04b324',.5)"
+              ],
+              [
+                "true",
+                "color('#0a0a0a',.5)"
+              ]
+            ]
+          },
+          "labelText": {
+            "conditions": [
+              [
+                "${attributes.free_speed} !== 'undefined'",
+                "${attributes.free_speed}"
+              ],
+              [
+                "true",
+                "${attributes.link_id}"
+              ]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              [
+                "${HIGHWAY} ==='motorway'",
+                "35"
+              ],
+              [
+                "${HIGHWAY} ==='primary'",
+                "30"
+              ],
+              [
+                "${HIGHWAY} ==='secondary'",
+                "25"
+              ],
+              [
+                "${HIGHWAY} ==='tertiary'",
+                "20"
+              ],
+              [
+                "${HIGHWAY}==='residential'",
+                "10"
+              ],
+              [
+                "${HIGHWAY} ==='trunk'",
+                "5"
+              ],
+              [
+                "${HIGHWAY} ==='none'",
+                "3"
+              ],
+              [
+                "true",
+                "3"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "CityFlows",
+        "title": "CityFlows",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "${attributes.feat_type} === 'smart_zone'",
+                "color('#ff5500',.5)"
+              ],
+              [
+                "regExp('proximus').test(${attributes.feat_type})",
+                "color('#5C2D91',.5)"
+              ],
+              [
+                "${attributes.feat_type} === 'osm_streets'",
+                "color('#696969',.5)"
+              ],
+              [
+                "regExp('mesh(.)', 'i').exec(${attributes.feat_type})",
+                "color('#FFA500',.5)"
+              ],
+              [
+                "regExp('telraam').test(${attributes.feat_type})",
+                "color('#019875',.5)"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              [
+                "${attributes.feat_type} === 'osm_streets'",
+                "10"
+              ],
+              [
+                "true",
+                "3"
+              ]
+            ]
+          },
+          "strokeColor": {
+            "conditions": [
+              [
+                "${attributes.feat_type} === 'smart_zone'",
+                "color('#ff5500',1)"
+              ],
+              [
+                "regExp('proximus').test(${attributes.feat_type})",
+                "color('#5C2D91',1)"
+              ],
+              [
+                "${attributes.feat_type} === 'osm_streets'",
+                "color('#696969',1)"
+              ],
+              [
+                "regExp('mesh(.)', 'i').exec(${attributes.feat_type})",
+                "color('#FFA500',1)"
+              ],
+              [
+                "regExp('telraam').test(${attributes.feat_type})",
+                "color('#019875',1)"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          },
+          "labelColor": {
+            "conditions": [
+              [
+                "${attributes.feat_type} === 'smart_zone'",
+                "color('#ff5500',1)"
+              ],
+              [
+                "regExp('proximus').test(${attributes.feat_type})",
+                "color('#55ff7f',1)"
+              ],
+              [
+                "${attributes.feat_type} === 'osm_streets'",
+                "color('#696969',1)"
+              ],
+              [
+                "${attributes.feat_type} === 'citymesh_locationcenter'",
+                "color('#FFA500',1)"
+              ],
+              [
+                "regExp('mesh(.)', 'i').exec(${attributes.feat_type})",
+                "color('#FFA500',1)"
+              ],
+              [
+                "regExp('telraam').test(${attributes.feat_type})",
+                "color('#019875',1)"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          },
+          "labelText": {
+            "conditions": [
+              [
+                "${attributes.feat_type} === 'citymesh_locationcenter'",
+                "${attributes.locationname}"
+              ],
+              [
+                "true",
+                "${attributes.name}"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "Comments",
+        "title": "Duet Comments",
+        "declarativeStyle": {
+          "show": "true",
+      "color": {
+            "conditions": [
+              [
+                "${attributes.category}==='visualization'",
+                "color('green',0.5)"
+              ],
+        [
+                "${attributes.category}==='simulation'",
+                "color('red',0.5)"
+              ],
+                  [
+                "${attributes.category}==='planning'",
+                "color('blue',0.5)"
+              ],
+              [
+                "true",
+                "color('gray',0.5)"
+              ]
+            ]
+          },
+      "strokeWidth": {
+            "conditions": [
+              [
+                "true",
+                "2"
+              ]
+            ]
+          },		
+      "strokeColor": {
+            "conditions": [
+              [
+                "${attributes.category}==='visualization'",
+                "color('green',1)"
+              ],
+        [
+                "${attributes.category}==='simulation'",
+                "color('red',1)"
+              ],
+                  [
+                "${attributes.category}==='planning'",
+                "color('blue',1)"
+              ],
+              [
+                "true",
+                "color('gray',1)"
+              ]
+            ]
+          },
+          "image": {
+            "conditions": [
+              [
+                "${attributes.category}==='visualization'",
+                "'/images/editor/icon-bubble-green.png'"
+              ],
+              [
+                "${attributes.category}==='simulation'",
+                "'/images/editor/icon-bubble-red.png'"
+              ],
+              [
+                "${attributes.category}==='planning'",
+                "'/images/editor/icon-bubble-blue.png'"
+              ],
+              [
+                "${attributes.category}==='other'",
+                "'/images/editor/icon-bubble.png'"
+              ],
+              [
+                "true",
+                "'/images/editor/icon-marker-o-red.png'"
+              ]
+            ]
+          },
+          "scale": {
+            "conditions": [
+              [
+                "true",
+                "1"
+              ]
+            ]
+          }
+        }
+      },   
+      {
+        "name": "PublicTransport",
+        "title": "Public Transport",
+        "declarativeStyle": {
+          "show": "true",
+          "image": {
+            "conditions": [
+              [
+                "Boolean(${attributes.NAAMHALTE}) === true",
+                "'./global/icons/De_Lijn.png'"
+              ],
+        [
+                "Boolean(${attributes.original_stop_id}) === true",
+                "'./global/icons/PMDP.png'"
+              ],
+        [
+                "(Boolean(${attributes.original_stop_id}) === false) && (Boolean(${attributes.stop_id}) === true)",
+                "'./global/icons/oasa.png'"
+              ],
+              [
+                "true",
+                "'/vcm/images/poi.png'"
+              ]
+            ]
+          }
+      }
+      },	
+      {
+        "name": "CityFlowSensors",
+        "title": "CityFlows Sensors",
+        "declarativeStyle": {
+          "show": "true",
+          "image": {
+            "conditions": [
+              [
+                "regExp('proximus').test(${attributes.sourceId})",
+                "'/global/icons/wifi.svg'"
+              ],
+              [
+                "true",
+                "'/vcm/images/poi.png'"
+              ]
+            ]
+          },
+          "scale": {
+            "conditions": [
+              [
+                "regExp('proximus').test(${attributes.sourceId})",
+                ".03"
+              ],
+              [
+                "true",
+                "1"
+              ]
+            ]
+          }
+        }
+      },
+    {
+        "name": "OpenAQ",
+        "title": "OpenAQ",
+        "declarativeStyle": {
+          "show": "true",
+      "color": {
+            "conditions": [
+        [
+                "regExp('^2022').test(${attributes.lastUpdated})",
+                "color('green',1)"
+              ],
+        [
+                "regExp('^2021').test(${attributes.lastUpdated})",
+                "color('limegreen',1)"
+              ],
+              [
+                "regExp('^2020').test(${attributes.lastUpdated})",
+                "color('orange',1)"
+              ],
+              [
+                "regExp('^2019').test(${attributes.lastUpdated})",
+                "color('red',1)"
+              ],
+              [
+                "true",
+                "color('red',1)"
+              ]		  
+            ]
+          },
+      "pointSize": {
+            "conditions": [
+        [
+                "regExp('^2022').test(${attributes.lastUpdated})",
+                "20"
+              ],
+              [
+                "regExp('^2021').test(${attributes.lastUpdated})",
+                "16"
+              ],
+              [
+                "regExp('^2020').test(${attributes.lastUpdated})",
+                "10"
+              ],
+              [
+                "true",
+                "10"
+              ]		  
+            ]
+          }
+    },
+    "legend": [
+          {
+            "color": "green",
+            "title": "most recent updated"
+          },
+          {
+            "color": "limegreen",
+            "title": "last time updated in 2021"
+          },
+          {
+            "color": "orange",
+            "title": "last time updated in 2020"
+          },
+      {
+            "color": "red",
+            "title": "last time updated before 2020"
+          }
+        ]
+    },	
+    {
+        "name": "Sensors",
+        "title": "Sensors",
+        "declarativeStyle": {
+          "show": "true",
+      "color": {
+            "conditions": [
+              [
+                "true",
+                "color('gray',0.5)"
+              ]		  
+            ]
+          },		
+          "image": {
+            "conditions": [
+              [
+                "(${attributes.measType} === 'temperature') || (${attributes.measType} === 'humidity') || (${attributes.measType} === 'pressure')",
+                "'./global/icons/temp2.png'"
+              ],
+        [
+                "(${attributes.measType} === 'P1') || (${attributes.measType} === 'P2') || (${attributes.measType} === 'air')",
+                "'./global/icons/air2.png'"
+              ],
+        [
+                "(${attributes.measurements[0].parameter} === 'pm10') || (${attributes.measurements[0].parameter} === 'pm25')",
+                "'./global/icons/air2.png'"
+              ]
+            ]
+          },
+          "scale": 0.1
+        }
+      },
+      {
+        "name": "TrafficFlow",
+        "title": "TrafficFlow",
+        "declarativeStyle": {
+          "defines": {
+            "FLOW": "Number(${attributes.flow}) > 0 ? Number(${attributes.flow}) : (Number(${attributes.traffic}) > 0 ? Number(${attributes.traffic}) : 1.0)",
+            "CAPACITY": "Number(${attributes.capacity}) > 0 ? Number(${attributes.capacity}) : 1.0",
+            "HIGHWAY": "${attributes.highway} !== 'undefined' ? String(${attributes.highway}) : 'none'"
+          },
+          "show": "true",
+          "color": "(${FLOW}/(${CAPACITY}/4)) >= 0.98 ?  color('#8B0000',.5): color('#228B22',.5)",
+          "strokeWidth": {
+            "conditions": [
+              [
+                "${HIGHWAY} ==='primary'",
+                "30"
+              ],
+              [
+                "${HIGHWAY} ==='secondary'",
+                "25"
+              ],
+              [
+                "${HIGHWAY} ==='tertiary'",
+                "20"
+              ],
+              [
+                "${HIGHWAY}==='residential'",
+                "10"
+              ],
+              [
+                "${HIGHWAY} ==='trunk'",
+                "5"
+              ],
+              [
+                "${HIGHWAY} ==='none'",
+                "3"
+              ],
+              [
+                "((${CAPACITY}/${FLOW}) > 0.85)",
+                "5"
+              ],
+              [
+                "((${CAPACITY}/${FLOW}) < 0.85)",
+                "10"
+              ],
+              [
+                "((${CAPACITY}/${FLOW}) >= 0.98)",
+                "3"
+              ],
+              [
+                "true",
+                "3"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "lineColor",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "${olcs_geometryType} === 2",
+                "color('#A9A9A9')"
+              ],
+              [
+                "true",
+                "color('#ffffff')"
+              ]
+            ]
+          }
+        }
+      },
+      {
+        "name": "traffic3D",
+        "declarativeStyle": {
+          "defines": {
+            "FLOW": "Number(${attributes.flow}) > 0 ? Number(${attributes.flow}) : (Number(${attributes.traffic}) > 0 ? Number(${attributes.traffic}) : 1.0)",
+            "CAPACITY": "Number(${attributes.capacity}) > 0 ? Number(${attributes.capacity}) : 1.0"
+          },
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "(${FLOW}-${CAPACITY}) >= 100",
+                "color('red', 0.5)"
+              ],
+              [
+                "(${FLOW}-${CAPACITY}) > 1",
+                "color('yellow', 0.5)"
+              ],
+              [
+                "true",
+                "color('green', 0.5)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "red",
+            "title": "traffic more then 100 over capacity"
+          },
+          {
+            "color": "yellow",
+            "title": "traffic less then 100 over capacity"
+          },
+          {
+            "color": "green",
+            "title": "everything flows"
+          }
+        ]
+      },
+      {
+        "name": "noisePC",
+        "declarativeStyle": {
+          "show": "true",
+          "pointSize": "4"
+        },
+        "legend": [
+          {
+            "color": "#006400",
+            "title": "LEQ: < 20"
+          },
+          {
+            "color": "#7CFC00",
+            "title": "LEQ: 20 - 30"
+          },
+          {
+            "color": "#FFFF00",
+            "title": "LEQ: 30 - 50"
+          },
+          {
+            "color": "#FF8C000",
+            "title": "LEQ: 50 - 65"
+          },
+          {
+            "color": "#FF0000",
+            "title": "LEQ: 65 - 80"
+          },
+          {
+            "color": "#800080",
+            "title": "LEQ: 80 - 90"
+          },
+          {
+            "color": "#191970",
+            "title": "LEQ: > 90"
+          }
+        ]
+      },
+      {
+        "name": "noise3D",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "(Number(${attributes.LAEQ}) >= 90) || (Number(${attributes.laeq}) >= 90) || (Number(${attributes.noise}) >= 90)",
+                "color('#191970')"
+              ],
+              [
+                "(Number(${attributes.LAEQ}) >= 80) || (Number(${attributes.laeq}) >= 80) || (Number(${attributes.noise}) >= 80)",
+                "color('#800080')"
+              ],
+              [
+                "(Number(${attributes.LAEQ}) >= 65) || (Number(${attributes.laeq}) >= 65) || (Number(${attributes.noise}) >= 65)",
+                "color('#FF0000')"
+              ],
+              [
+                "(Number(${attributes.LAEQ}) >= 50) || (Number(${attributes.laeq}) >= 50) || (Number(${attributes.noise}) >= 50)",
+                "color('#FF8C00')"
+              ],
+              [
+                "(Number(${attributes.LAEQ}) >= 30) || (Number(${attributes.laeq}) >= 30) || (Number(${attributes.noise}) >= 30)",
+                "color('#FFFF00')"
+              ],
+              [
+                "(Number(${attributes.LAEQ}) >= 20) || (Number(${attributes.laeq}) >= 20) || (Number(${attributes.noise}) >= 20)",
+                "color('#7CFC00')"
+              ],
+              [
+                "(Number(${attributes.LAEQ}) < 20) || (Number(${attributes.laeq}) < 20) || (Number(${attributes.noise}) < 20)",
+                "color('#006400')"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#006400",
+            "title": "Noise: < 20"
+          },
+          {
+            "color": "#7CFC00",
+            "title": "Noise: 20 - 30"
+          },
+          {
+            "color": "#FFFF00",
+            "title": "Noise: 30 - 50"
+          },
+          {
+            "color": "#FF8C00",
+            "title": "Noise: 50 - 65"
+          },
+          {
+            "color": "#FF0000",
+            "title": "Noise: 65 - 80"
+          },
+          {
+            "color": "#800080",
+            "title": "Noise: 80 - 90"
+          },
+          {
+            "color": "#191970",
+            "title": "Noise: > 90"
+          }
+        ]
+      },
+      {
+        "name": "noiseNew",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "(Number(${attributes.NOISE}) >= 90) || (Number(${attributes.noise}) >= 90)",
+                "color('#191970')"
+              ],
+              [
+                "(Number(${attributes.NOISE}) >= 80) || (Number(${attributes.noise}) >= 80)",
+                "color('#800080')"
+              ],
+              [
+                "(Number(${attributes.NOISE}) >= 65) || (Number(${attributes.noise}) >= 65)",
+                "color('#FF0000')"
+              ],
+              [
+                "(Number(${attributes.NOISE}) >= 50) || (Number(${attributes.noise}) >= 50)",
+                "color('#FF8C00')"
+              ],
+              [
+                "(Number(${attributes.NOISE}) >= 30) || (Number(${attributes.noise}) >= 30)",
+                "color('#FFFF00')"
+              ],
+              [
+                "(Number(${attributes.NOISE}) >= 20) || (Number(${attributes.noise}) >= 20)",
+                "color('#7CFC00')"
+              ],
+              [
+                "(Number(${attributes.NOISE}) < 20) || (Number(${attributes.noise}) < 20)",
+                "color('#006400')"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#006400",
+            "title": "Noise: < 20"
+          },
+          {
+            "color": "#7CFC00",
+            "title": "Noise: 20 - 30"
+          },
+          {
+            "color": "#FFFF00",
+            "title": "Noise: 30 - 50"
+          },
+          {
+            "color": "#FF8C00",
+            "title": "Noise: 50 - 65"
+          },
+          {
+            "color": "#FF0000",
+            "title": "Noise: 65 - 80"
+          },
+          {
+            "color": "#800080",
+            "title": "Noise: 80 - 90"
+          },
+          {
+            "color": "#191970",
+            "title": "Noise: > 90"
+          }
+        ]
+      },    
+      {
+        "name": "airPollution3D",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+              [
+                "Number(${attributes.C_NO2}) >= 50",
+                "color('#191970')"
+              ],
+              [
+                "Number(${attributes.C_NO2}) >= 40",
+                "color('#800080')"
+              ],
+              [
+                "Number(${attributes.C_NO2}) >= 35",
+                "color('#FF0000')"
+              ],
+              [
+                "Number(${attributes.C_NO2}) >= 30",
+                "color('#FF8C00')"
+              ],
+              [
+                "Number(${attributes.C_NO2}) >= 25",
+                "color('#FFFF00')"
+              ],
+              [
+                "Number(${attributes.C_NO2}) >= 20",
+                "color('#7CFC00')"
+              ],
+              [
+                "Number(${attributes.C_NO2}) < 20",
+                "color('#006400')"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#006400",
+            "title": "CO² / NO²: < 20"
+          },
+          {
+            "color": "#7CFC00",
+            "title": "CO² / NO²: 20 - 25"
+          },
+          {
+            "color": "#FFFF00",
+            "title": "CO² / NO²: 25 - 30"
+          },
+          {
+            "color": "#FF8C00",
+            "title": "CO² / NO²: 30 - 35"
+          },
+          {
+            "color": "#FF0000",
+            "title": "CO² / NO²: 35 - 40"
+          },
+          {
+            "color": "#800080",
+            "title": "CO² / NO²: 40 - 50"
+          },
+          {
+            "color": "#191970",
+            "title": "CO² / NO²: > 50"
+          }
+        ]
+      },
+      {
+        "name": "airPollutionPC",
+        "declarativeStyle": {
+          "show": "true",
+          "pointSize": "4"
+        },
+        "legend": [
+          {
+            "color": "#006400",
+            "title": "CO² / NO²: < 20"
+          },
+          {
+            "color": "#7CFC00",
+            "title": "CO² / NO²: 20 - 25"
+          },
+          {
+            "color": "#FFFF00",
+            "title": "CO² / NO²: 25 - 30"
+          },
+          {
+            "color": "#FF8C000",
+            "title": "CO² / NO²: 30 - 35"
+          },
+          {
+            "color": "#FF0000",
+            "title": "CO² / NO²: 35 - 40"
+          },
+          {
+            "color": "#800080",
+            "title": "CO² / NO²: 40 - 50"
+          },
+          {
+            "color": "#191970",
+            "title": "CO² / NO²: > 50"
+          }
+        ]
+      },
+      {
+        "name": "Height",
+        "title": "Building height",
+        "declarativeStyle": {
+          "show": "Boolean(${attributes.HN_MAX}) === true",
+          "color": {
+            "conditions": [
+              [
+                "Number(${attributes.HN_MAX}) >= 150",
+                "color('#ff0000')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 135",
+                "color('#f6002a')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 120",
+                "color('#ed0044')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 105",
+                "color('#e3005b')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 90",
+                "color('#d70072')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 75",
+                "color('#ca0088')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 60",
+                "color('#ba009f')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 45",
+                "color('#a600b7')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 30",
+                "color('#8d00ce')"
+              ],
+              [
+                "Number(${attributes.HN_MAX}) >= 7",
+                "color('#6800e7')"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#ff0000",
+            "title": "height > 150"
+          },
+          {
+            "color": "#f6002a",
+            "title": "height > 135"
+          },
+          {
+            "color": "#ed0044",
+            "title": "height > 120"
+          },
+          {
+            "color": "#e3005b",
+            "title": "height > 105"
+          },
+          {
+            "color": "#d70072",
+            "title": "height > 90"
+          },
+          {
+            "color": "#ca0088",
+            "title": "height > 75"
+          },
+          {
+            "color": "#ba009f",
+            "title": "height > 60"
+          },
+          {
+            "color": "#a600b7",
+            "title": "height > 45"
+          },
+          {
+            "color": "#8d00ce",
+            "title": "height > 30"
+          },
+          {
+            "color": "#6800e7",
+            "title": "height > 7"
+          },
+          {
+            "color": "white",
+            "title": "height < 7"
+          }
+        ]
+      },
+      {
+        "name": "OSM Height",
+        "title": "Building height",
+        "declarativeStyle": {
+          "show": "Boolean(${attributes.measuredHeight}) === true",
+          "color": {
+            "conditions": [
+              [
+                "Number(${attributes.measuredHeight}) >= 150",
+                "color('#ff0000')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 135",
+                "color('#f6002a')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 120",
+                "color('#ed0044')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 105",
+                "color('#e3005b')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 90",
+                "color('#d70072')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 75",
+                "color('#ca0088')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 60",
+                "color('#ba009f')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 45",
+                "color('#a600b7')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 30",
+                "color('#8d00ce')"
+              ],
+              [
+                "Number(${attributes.measuredHeight}) >= 7",
+                "color('#6800e7')"
+              ],
+              [
+                "true",
+                "color('white',1)"
+              ]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#ff0000",
+            "title": "height > 150"
+          },
+          {
+            "color": "#f6002a",
+            "title": "height > 135"
+          },
+          {
+            "color": "#ed0044",
+            "title": "height > 120"
+          },
+          {
+            "color": "#e3005b",
+            "title": "height > 105"
+          },
+          {
+            "color": "#d70072",
+            "title": "height > 90"
+          },
+          {
+            "color": "#ca0088",
+            "title": "height > 75"
+          },
+          {
+            "color": "#ba009f",
+            "title": "height > 60"
+          },
+          {
+            "color": "#a600b7",
+            "title": "height > 45"
+          },
+          {
+            "color": "#8d00ce",
+            "title": "height > 30"
+          },
+          {
+            "color": "#6800e7",
+            "title": "height > 7"
+          },
+          {
+            "color": "white",
+            "title": "height < 7"
+          }
+        ]
+      },
+    {
+        "name": "Telraam_live_traffic",
+        "title": "Telraam traffic",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+        [
+                "Number(${attributes.car}) >= 2000",
+                "color('#000000',0.7)"
+              ],
+        [
+                "Number(${attributes.car}) >= 1000",
+                "color('#0B0564',0.7)"
+              ],
+        [
+                "Number(${attributes.car}) >= 500",
+                "color('#5700A4',0.7)"
+              ],
+        [
+                "Number(${attributes.car}) >= 200",
+                "color('#8F0DA3',0.7)"
+              ],
+        [
+                "Number(${attributes.car}) >= 100",
+                "color('#D25070',0.7)"
+              ],
+        [
+                "Number(${attributes.car}) >= 50",
+                "color('#F2845C',0.7)"
+              ],
+        [
+                "Number(${attributes.car}) >= 0",
+                "color('#F7D756',0.7)"
+              ],			
+              ["true", "color('#F7D756',1)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["true", "10"]
+            ]
+          }
+        },
+    "legend": [
+          {
+            "color": "#F7D756",
+            "title": "0/h"
+          },{
+            "color": "#F2845C",
+            "title": "50/h"
+          },{
+            "color": "#D25070",
+            "title": "100/h"
+          },{
+            "color": "#8F0DA3",
+            "title": "200/h"
+          },{
+            "color": "#5700A4",
+            "title": "500/h"
+          },{
+            "color": "#0B0564",
+            "title": "1000/h"
+          },{
+            "color": "#000000",
+            "title": "2000/h"
+          }
+        ]
+      },
+    {
+        "name": "Traffic_incidents",
+        "title": "Traffic incidents",
+        "declarativeStyle": {
+          "show": "true",
+          "color": {
+            "conditions": [
+        [
+                "${attributes.reason} === 'trafficjam'",
+                "color('#ff0f00',0.7)"
+              ],
+        [
+                "${attributes.reason} === 'roadworks'",
+                "color('#ffc000',0.7)"
+              ],
+        [
+                "${attributes.reason} === 'info'",
+                "color('#5700A4',0.7)"
+              ],
+        [
+                "${attributes.reason} === 'detour'",
+                "color('#ff6500',0.7)"
+              ],
+        [
+                "${attributes.reason} === 'blocked'",
+                "color('#680000',0.7)"
+              ],
+        [
+                "${attributes.reason} === 'accident'",
+                "color('#F2845C',0.7)"
+              ],		
+              ["true", "color('#F7D756',1)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["true", "10"]
+            ]
+          },
+      "image": {
+            "conditions": [
+              [
+                "${attributes.reason} === 'accident'",
+                "'./global/icons/incident.png'"
+              ],
+        [
+                "${attributes.reason} === 'blocked'",
+                "'./global/icons/blocked.png'"
+              ],
+        [
+                "${attributes.reason} === 'detour'",
+                "'./global/icons/detour.png'"
+              ],
+        [
+                "${attributes.reason} === 'roadworks'",
+                "'./global/icons/roadworks.png'"
+              ],
+        [
+                "${attributes.reason} === 'info'",
+                "'./global/icons/information.png'"
+              ]
+            ]
+          },
+          "scale": 1
+        },
+    "legend": [
+          {
+            "color": "#F7D756",
+            "title": "everything else"
+          },{
+            "color": "#F2845C",
+            "title": "accident"
+          },{
+            "color": "#680000",
+            "title": "blocked"
+          },{
+            "color": "#ff6500",
+            "title": "detour"
+          },{
+            "color": "#5700A4",
+            "title": "information"
+          },{
+            "color": "#ffc000",
+            "title": "roadworks"
+          },{
+            "color": "#ff0f00",
+            "title": "traffic jam"
+          }
+        ]
+      },	
+        {
+        "name": "TrafficFlowGeneric_old",
+        "title": "TrafficFlow for traffic models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0,
+            "max":12000,
+            "FLOW":"(Number(${attributes.traffic}) > 0) && (${attributes.traffic} !== 'undefined') ? Number(${attributes.traffic}) : 1",
+            "CAPACITY":"(Number(${attributes.capacity}) > 0) && (${attributes.capacity} !== 'undefined') ? Number(${attributes.capacity})/4.0 : 1"
+          },
+          "show": "true",
+          "color": {
+            "conditions": [
+              ["(${FLOW} / ${CAPACITY}) >= 0.98", "color('#8B0000',.7)"],
+              ["(${FLOW} / ${CAPACITY}) >= 0.5", "color('#f5f105',.7)"],
+              ["(${FLOW} / ${CAPACITY}) > 0", "color('#228B22',.7)"],
+              ["(${FLOW}) === 1", "color('#8B0000',.7)"],
+              ["true", "color('#4d4f4d',0.5)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["(${FLOW}/(${max}/4)) >= 0.8","20"],
+              ["(${FLOW}/(${max}/4)) >= 0.6","15"],
+              ["(${FLOW}/(${max}/4)) >= 0.4","10"],
+              ["(${FLOW}/(${max}/4)) >= 0.2","5"],
+              ["true", "3"]
+            ]
+          }
+        },
+    "legend": [
+          {
+            "color": "#8B0000",
+            "title": "traffic is close to capacity or over it"
+          },
+      {
+            "color": "#f5f105",
+            "title": "traffic seems to be fine"
+          },
+      {
+            "color": "#228B22",
+            "title": "traffic is okay"
+          },
+      {
+            "color": "#4d4f4d",
+            "title": "everything flows"
+          }
+        ]
+      }, 
+      {
+        "name": "TrafficFlowGeneric",
+        "title": "TrafficFlow for traffic models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0,
+            "max":12000,
+            "FLOW":"(Number(${attributes.flow}) > 0) && (${attributes.flow} !== 'undefined') ? Number(${attributes.flow}) : 1",
+            "CAPACITY":"(Number(${attributes.capacity}) > 0) && (${attributes.capacity} !== 'undefined') ? Number(${attributes.capacity}) : 1"
+          },
+          "show": "${attributes.connector} === undefined",
+          "color": {
+            "conditions": [
+              ["(${FLOW} / ${CAPACITY}) >= 0.98", "color('#8B0000',.7)"],
+              ["(${FLOW} / ${CAPACITY}) >= 0.5", "color('#f5f105',.7)"],
+              ["(${FLOW} / ${CAPACITY}) > 0", "color('#228B22',.7)"],
+              ["(${FLOW}) === 1", "color('#8B0000',.7)"],
+              ["true", "color('#4d4f4d',0.5)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["(${FLOW}/(${max}/4)) >= 0.8","20"],
+              ["(${FLOW}/(${max}/4)) >= 0.6","15"],
+              ["(${FLOW}/(${max}/4)) >= 0.4","10"],
+              ["(${FLOW}/(${max}/4)) >= 0.2","5"],
+              ["true", "3"]
+            ]
+          }
+        },
+    "legend": [
+          {
+            "color": "#8B0000",
+            "title": "traffic is close to capacity or over it"
+          },
+      {
+            "color": "#f5f105",
+            "title": "traffic seems to be fine"
+          },
+      {
+            "color": "#228B22",
+            "title": "traffic is okay"
+          },
+      {
+            "color": "#4d4f4d",
+            "title": "everything flows"
+          }
+        ]
+      },     
+      {
+        "name": "TrafficFlowGenericArray",
+        "title": "TrafficFlow for traffic models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0,
+            "max":12000,
+            "CAPACITY":"Number(${attributes.capacity}) > 0 ? (Number(${attributes.capacity})) : 1"
+          },
+          "show": "((Boolean(${attributes.flow}) === true) && (Number(${attributes.flow[${index}]}) >= 0) && (${attributes.connector} === undefined))",
+          "color": {
+            "conditions": [
+              ["((Number(${attributes.flow[${index}]}) > 0 ? Number(${attributes.flow[${index}]}) : 1)/${CAPACITY}) >= 0.98", "color('#8B0000',.7)"],
+              ["((Number(${attributes.flow[${index}]}) > 0 ? Number(${attributes.flow[${index}]}) : 1)/${CAPACITY}) >= 0.5", "color('#f5f105',.7)"],
+              ["((Number(${attributes.flow[${index}]}) > 0 ? Number(${attributes.flow[${index}]}) : 1)/${CAPACITY}) >= 0.1", "color('#228B22',0.7)"],
+              ["(Number(${attributes.flow[${index}]}) === 0) || (Number(${attributes.flow[${index}]}) === 1)", "color('#4d4f4d',0.7)"],
+              ["true", "color('#4d4f4d',0.7)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.8","20"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.6","15"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.4","10"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.2","7"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) > 0","5"],
+              ["true", "3"]
+            ]
+          }
+        },
+      "legend": [
+          {
+            "color": "#8B0000",
+            "title": "traffic is close to capacity or over it"
+          },
+      {
+            "color": "#f5f105",
+            "title": "traffic seems to be fine"
+          },
+      {
+            "color": "#228B22",
+            "title": "traffic is okay"
+          },
+      {
+            "color": "#4d4f4d",
+            "title": "everything flows"
+          }
+        ]
+      },
+      {
+        "name": "TrafficDeltaFlowGenericArray_perc",
+        "title": "TrafficFlow for traffic models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0
+          },
+          "show": "(Boolean(${attributes.flow_delta}) === true)",
+          "color": {
+            "conditions": [
+        ["Number(${attributes.flow_delta[${index}]}) > 90", "color('#c51b7d',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) > 50", "color('#e9a3c9',1)"],
+              ["Number(${attributes.flow_delta[${index}]}) > 0", "color('#fde0ef',1)"],
+              ["Number(${attributes.flow_delta[${index}]}) < 0", "color('#e6f5d0',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) < -50", "color('#a1d76a',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) < -100", "color('#4d9221',1)"],
+              ["true", "color('686869',1)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["true","5"]
+            ]
+          }
+        },
+        "legend": [
+          {
+            "color": "#c51b7d",
+            "title": "major increase"
+          },
+      {
+            "color": "#e9a3c9",
+            "title": "increase"
+          },
+      {
+            "color": "#fde0ef",
+            "title": "minor increase"
+          },
+      {
+            "color": "#a1d76a",
+            "title": "minor decrease"
+          },
+      {
+            "color": "#a1d76a",
+            "title": "decrease"
+          },
+      {
+            "color": "#4d9221",
+            "title": "major decrease"
+          }
+        ]
+      },      
+      {
+        "name": "TrafficDeltaFlowGenericArray",
+        "title": "TrafficFlow for traffic models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0
+          },
+          "show": "((Boolean(${attributes.flow_delta}) === true) && (${attributes.connector} === undefined))",
+          "color": {
+            "conditions": [			
+        ["Number(${attributes.flow_delta[${index}]}) > 500", "color('#d01c8b',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) > 50", "color('#f1b6da',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) < -500", "color('#4dac26',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) < -50", "color('#b8e186',1)"]
+            ]
+          },
+          "strokeWidth": "5"
+        },
+        "legend": [
+      {
+            "color": "#d01c8b",
+            "title": "increase"
+          },
+      {
+            "color": "#f1b6da",
+            "title": "minor increase"
+          },
+      {
+            "color": "#4d4f4d",
+            "title": "not changed"
+          },
+      {
+            "color": "#b8e186",
+            "title": "minor decrease"
+          },
+      {
+            "color": "#4dac26",
+            "title": "decrease"
+          }
+        ]
+      },   	
+      {
+        "name": "TrafficDeltaFlowGenericArray_old",
+        "title": "TrafficFlow for traffic models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0
+          },
+          "show": "(Boolean(${attributes.flow_delta}) === true) && (abs(Number(${attributes.flow_delta[${index}]})) > 50)",
+          "color": {
+            "conditions": [			
+        ["Number(${attributes.flow_delta[${index}]}) > 500", "color('#d01c8b',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) > 50", "color('#f1b6da',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) < -500", "color('#4dac26',1)"],
+        ["Number(${attributes.flow_delta[${index}]}) < -50", "color('#b8e186',1)"]
+        
+            ]
+          },
+          "strokeWidth": "5"
+        },
+        "legend": [
+      {
+            "color": "#d01c8b",
+            "title": "increase"
+          },
+      {
+            "color": "#f1b6da",
+            "title": "minor increase"
+          },
+      {
+            "color": "#b8e186",
+            "title": "minor decrease"
+          },
+      {
+            "color": "#4dac26",
+            "title": "decrease"
+          }
+        ]
+      },       
+      {
+        "name": "NoiseDeltaFlowGenericArray",
+        "title": "Delta for noise models",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0
+          },
+          "show": "(Boolean(${attributes.leq_delta}) === true) && (abs(Number(${attributes.leq_delta[${index}]})) > 1) || (Boolean(${attributes.noise_delta}) === true) && (abs(Number(${attributes.noise_delta[${index}]})) > 1)",
+          "color": {
+            "conditions": [			
+        ["Number(${attributes.leq_delta[${index}]}) > 15", "color('#c51b7d',1)"],
+        ["Number(${attributes.leq_delta[${index}]}) > 5", "color('#e9a3c9',1)"],
+        ["Number(${attributes.leq_delta[${index}]}) > 1", "color('#fde0ef',1)"],
+        ["Number(${attributes.leq_delta[${index}]}) < -15", "color('#4d9221',1)"],
+        ["Number(${attributes.leq_delta[${index}]}) < -5", "color('#a1d76a',1)"],
+        ["Number(${attributes.leq_delta[${index}]}) < -1", "color('#e6f5d0',1)"],
+        ["Number(${attributes.noise_delta[${index}]}) > 15", "color('#c51b7d',1)"],
+        ["Number(${attributes.noise_delta[${index}]}) > 5", "color('#e9a3c9',1)"],
+        ["Number(${attributes.noise_delta[${index}]}) > 1", "color('#fde0ef',1)"],
+        ["Number(${attributes.noise_delta[${index}]}) < -15", "color('#4d9221',1)"],
+        ["Number(${attributes.noise_delta[${index}]}) < -5", "color('#a1d76a',1)"],
+        ["Number(${attributes.noise_delta[${index}]}) < -1", "color('#e6f5d0',1)"]			
+            ]
+          }
+        },
+        "legend": [
+      {
+            "color": "#d10404",
+            "title": "major increase"
+          },
+      {
+            "color": "#f75959",
+            "title": "increase"
+          },
+      {
+            "color": "#fc9f9f",
+            "title": "minor increase"
+          },
+      {
+            "color": "#8cf02b",
+            "title": "minor decrease"
+          },
+      {
+            "color": "#5ab304",
+            "title": "decrease"
+          },
+      {
+            "color": "#418203",
+            "title": "major decrease"
+          }
+        ]
+      },          
+    {
+        "name": "TrafficFlowKUL",
+        "title": "TrafficFlow for KUL model",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0,
+            "max":12000
+          },
+          "show": "true",
+          "color": {
+            "conditions": [
+              ["((Number(${attributes.flow[${index}]}) > 0 ? Number(${attributes.flow[${index}]}) : 1)/(Number(${attributes.capacity})> 0 ? Number(${attributes.capacity})/4.0:1)) >= 0.98", "color('#8B0000',.7)"],
+              ["((Number(${attributes.flow[${index}]}) > 0 ? Number(${attributes.flow[${index}]}) : 1)/(Number(${attributes.capacity})> 0 ? Number(${attributes.capacity})/4.0:1)) >= 0.5", "color('#f5f105',.7)"],
+              ["((Number(${attributes.flow[${index}]}) > 0 ? Number(${attributes.flow[${index}]}) : 1)/(Number(${attributes.capacity})> 0 ? Number(${attributes.capacity})/4.0:1)) >= 0", "color('#228B22',.7)"],
+              ["true", "color('#4d4f4d',.7)"]
+            ]
+          },
+          "strokeWidth": {
+            "conditions": [
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.8","20"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.6","15"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.4","10"],
+              ["(${attributes.flow[${index}]}/(${max}/4)) >= 0.2","5"],
+              ["true", "3"]
+            ]
+          }
+        },
+      "legend": [
+          {
+            "color": "#8B0000",
+            "title": "traffic is close to capacity or over it"
+          },
+      {
+            "color": "#f5f105",
+            "title": "traffic seems to be fine"
+          },
+      {
+            "color": "#228B22",
+            "title": "traffic is okay"
+          },
+      {
+            "color": "#4d4f4d",
+            "title": "everything flows"
+          }
+        ]
+      },
+      {
+        "name": "TrafficFlowP4all",
+        "title": "TrafficFlow for p4all model",
+        "declarativeStyle": {
+          "defines": {
+            "index": 0,
+            "max":15000
+          },
+          "show": "true",
+          "color": "(${attributes.flow[${index}]}/${attributes.capacity}) >= 0.98 ? color('#8B0000',.7): color('#228B22',.7)",
+          "strokeWidth": {
+            "conditions": [
+              ["(${attributes.flow[${index}]}/${max}) >= 0.8","20"],
+              ["(${attributes.flow[${index}]}/${max}) >= 0.6","15"],
+              ["(${attributes.flow[${index}]}/${max}) >= 0.4","10"],
+              ["(${attributes.flow[${index}]}/${max}) >= 0.2","5"],
+              ["true", "3"]
+            ]
+          }
+        },
+      "legend": [
+          {
+            "color": "#8B0000",
+            "title": "traffic is close to capacity or over it"
+          },
+      {
+            "color": "#228B22",
+            "title": "traffic is okay"
+          }
+        ]
+      },
+      {
+        "name": "geojsonHighlightStyle",
+        "type": "vector",
+        "fill": {
+          "color": [
+            255,
+            0,
+            0,
+            0.5
+          ]
+        },
+        "stroke": {
+          "color": [
+            50,
+            155,
+            50,
+            1
+          ],
+          "width": 3
+        },
+        "image": {
+          "circle": {
+            "fill": {
+            "color": "rgba(255,255,255,1.0)"
+          },
+          "stroke": {
+            "color": "rgba(0,0,0,1.0)",
+            "width": 1
+          },
+          "radius": 5
+          }
+        }
+      },
+      {
+        "name": "geojsonSelectStyle",
+        "type": "vector",
+        "fill": {
+          "color": [
+            0,
+            0,
+            255,
+            0.5
+          ]
+        },
+        "stroke": {
+          "color": [
+            50,
+            155,
+            50,
+            1
+          ],
+          "width": 3
+        }
+      },
+    {
+        "name": "openaqVec",
+        "type": "vector",
+      "image": {
+          "icon": {
+            "src": "'/global/icons/openaq2.png'"
+      }
+        }
+      }
+    ]
+  }

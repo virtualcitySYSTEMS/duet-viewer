@@ -1,0 +1,140 @@
+{
+  "name": "duetviewer",
+  "version": "0.0.1",
+  "getDataFrom": "duet",
+  "dev-mode": true,
+  "apiKey": "",
+  "entry": "plugins/duetviewer/index.js",
+  "duetCatalogURL": "duetCatalog-dev/",
+  "baseURL": "https://services.citytwin.eu",
+  "appReceiverURL": "nodeTopic/",
+  "appSenderURL": "https://services.citytwin.eu/app-sender/websocket",
+  "casesURL2": "cases-dev-api/",
+  "casesURL": "https://services.citytwin.eu/cases-dev/",
+  "commentsURL": "https://services.citytwin.eu/comments",
+  "interactionURL": "interaction-api/",
+  "federatedURL": "federated/",
+  "scenarioURL": "https://services.citytwin.eu/scenarios/scenarios",
+  "experimentURL": "https://services.citytwin.eu/scenarios/experiments",
+  "models": [
+    "traffic",
+    "noise",
+    "air",
+    "control",
+    "error"
+  ],
+  "traffic": [
+    {
+      "region": "Pilsen",
+      "topicForResults": "/topic/road-network-calculation-result-pilsen",
+      "topicForChanges": "road-network-pilsen",
+      "type": "traffic"
+    },
+    {
+      "region": "Athens",
+      "topicForResults": "/topic/road-network-calculation-result-athens",
+      "topicForChanges": "road-network-athens",
+      "type": "traffic"
+    },
+    {
+      "region": "Flanders",
+      "topicForResults": "/topic/road-network-calculation-result-flanders",
+      "topicForChanges": "road-network-flanders",
+      "type": "traffic"
+    },
+    {
+      "region": "Gent",
+      "topicForResults": "/topic/kul-gent-traffic-results",
+      "topicForChanges": "kul-gent-traffic",
+      "type": "traffic"
+    }
+  ],
+  "noise": [
+    {
+      "region": "Pilsen",
+      "topicForResults": "/topic/noise-calculation-result-pilsen",
+      "topicForChanges": "",
+      "type": "noise"
+    },
+    {
+      "region": "Athens",
+      "topicForResults": "/topic/noise-calculation-result-athens",
+      "topicForChanges": "",
+      "type": "noise"
+    },
+    {
+      "region": "Gent",
+      "topicForResults": "/topic/noise-calculation-result-gent",
+      "topicForChanges": "",
+      "type": "noise"
+    }
+  ],
+  "air": [
+    {
+      "region": "Pilsen",
+      "topicForResults": "/topic/air-calculation-result-pilsen",
+      "topicForChanges": "",
+      "type": "air"
+    },
+    {
+      "region": "Athens",
+      "topicForResults": "/topic/air-calculation-result-athens",
+      "topicForChanges": "",
+      "type": "air"
+    },
+    {
+      "region": "Gent",
+      "topicForResults": "/topic/air-calculation-result-gent",
+      "topicForChanges": "",
+      "type": "air"
+    },
+    {
+      "region": "Gent",
+      "topicForResults": "/topic/vito-gent",
+      "topicForChanges": "",
+      "type": "air"
+    }
+  ],
+  "control": [
+    {
+      "region": "Athens",
+      "topicForResults": "/topic/noise-calculation-result-athens",
+      "topicForChanges": "/topic/noise-calculation-control-athens",
+      "type": "control"
+    },
+    {
+      "region": "Gent",
+      "topicForResults": "/topic/noise-calculation-result-gent",
+      "topicForChanges2": "/topic/kul-gent-traffic-results",
+      "topicForChanges": "/topic/noise-calculation-control-gent",
+      "type": "control"
+    },
+    {
+      "region": "Pilsen",
+      "topicForResults": "/topic/air-calculation-result-pilsen",
+      "topicForChanges": "/topic/air-calculation-control-pilsen",
+      "type": "control"
+    },
+    {
+      "region": "Athens",
+      "topicForResults": "/topic/air-calculation-result-athens",
+      "topicForChanges": "/topic/air-calculation-control-athens",
+      "type": "control"
+    },
+    {
+      "region": "Gent",
+      "topicForResults": "/topic/air-calculation-result-gent",
+      "topicForChanges2": "/topic/kul-gent-traffic-results",
+      "topicForChanges": "/topic/air-calculation-control-gent",
+      "type": "control"
+    }
+  ],
+  "error": [
+    {
+      "region": "all",
+      "topicForResults": "/topic/duet-error",
+      "topicForChanges": "duet-error",
+      "type": "error"
+    }
+  ]
+}

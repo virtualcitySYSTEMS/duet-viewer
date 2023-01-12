@@ -1,0 +1,57 @@
+{
+  "name": "duetviewer",
+  "version": "1.0.0",
+  "description": "duet viewer based on new vc map ui and core",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "vcmplugin build",
+    "build": "vcmplugin build",
+    "pack": "vcmplugin pack",
+    "start": "vcmplugin serve",
+    "preview": "vcmplugin preview",
+    "buildStagingApp": "vcmplugin buildStagingApp",
+    "lint": "eslint \"{src,tests}/**/*.{js,vue}\""
+  },
+  "author": "Thomas Adolphi <tadolphi@vc.systems>",
+  "license": "MIT",
+  "keywords": [
+    "vcmap",
+    "plugin"
+  ],
+  "files": [
+    "src/",
+    "dist/",
+    "plugin-assets/",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./dist": "./dist/index.js"
+  },
+  "eslintIgnore": [
+    "node_modules"
+  ],
+  "eslintConfig": {
+    "root": true,
+    "extends": "@vcsuite/eslint-config/vue"
+  },
+  "peerDependencies": {
+    "@vcmap/cesium": "~1.97.1",
+    "@vcmap/core": "~5.0.0-rc.25",
+    "@vcmap/ui": "^5.0.0-rc.17",
+    "ol": "~7.1.0",
+    "vue": "~2.7.3",
+    "vuetify": "2.6.14"
+  },
+  "devDependencies": {
+    "@vcmap/plugin-cli": "^2.1.2",
+    "@vcsuite/eslint-config": "^2.1.1"
+  },
+  "dependencies": {
+    "@turf/turf": "^6.5.0",
+    "nanoid": "^4.0.0",
+    "toastr": "^2.1.4"
+  }
+}
