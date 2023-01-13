@@ -1,8 +1,8 @@
 import dueterror from './errorlogging.js';
 
 /**
- * @param {object} conf - plugin configuration file to be validated by function  
- * @returns 
+ * @param {Object} conf - plugin configuration file to be validated by function
+ * @returns {boolean}
  */
 export default function validateConfig(conf) {
   // console.log("Config will be validated");

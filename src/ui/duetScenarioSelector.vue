@@ -47,12 +47,13 @@
 </template>
 
 <script>
-  import { inject, computed } from 'vue';
+  import { computed, inject } from 'vue';
   import {
-    VContainer, VRow, VCard, VTimeline, VTimelineItem, VCardText, VCardTitle, VCardSubtitle, VBtn,
+    VBtn, VCard, VCardSubtitle, VCardText, VCardTitle, VContainer, VRow, VTimeline, VTimelineItem,
   } from 'vuetify/lib';
-  import { loadScenario } from '../duet-api/duetScenario.js';
   import { removeDuetLayers } from '../duet-api/duetAPI.js';
+  import { loadScenario } from '../duet-api/duetScenario.js';
+  import dueterror from '../duet-api/errorlogging.js';
 
   export const windowScenarioId = 'duetScenarioSelector-id';
 
@@ -70,11 +71,15 @@
       const activeScenario = computed(() => (plugin.state.scenario.value));
       const fetchedScenarios = computed(() => (plugin.state.scenarios.value));
       const selectedCase = computed(() => (plugin.state.caseId.value));
-      // const activeScenario = ref();
+
+      /**
+       *
+       * @param {Object} selectedScenario - config object of selected scenario fetched from DUET scenario service
+       */
       async function selectScenario(selectedScenario) {
         removeDuetLayers(app);
-        // activeScenario.value=selectedScenario.id;
         if (activeScenario.value.id === selectedScenario.id) {
+          // active scenario will be unloaded
           plugin.state.scenario.value = {};
           plugin.state.experiment.value = {};
           plugin.state.scenarioId.value = 0;
@@ -82,7 +87,8 @@
         } else {
           plugin.state.scenario.value = selectedScenario;
           plugin.state.scenarioId.value = selectedScenario.id;
-          loadScenario(app, selectedScenario);
+          await loadScenario(app, selectedScenario);
+          dueterror.addError({ function: 'selectScenario()', message: `Scenario ${selectedScenario.id} successfully loaded` }, 1);
         }
       }
       return {

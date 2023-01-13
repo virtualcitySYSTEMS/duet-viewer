@@ -4,9 +4,9 @@ import dueterror from './errorlogging.js';
 import { layerLoader, styleLoader, viewpointLoader } from './loaders.js';
 
 /**
- * @param {string} url - url to DUET scenario service 
+ * @param {string} url - url to DUET scenario service
  * @param {number} id - integer id of case to fetch the scenarios for
- * @returns response
+ * @returns {Object} response
  */
 export async function getAllScenariosForCase(url, id) {
   const response = await fetch(`${url }/case/${id}`).catch((e) => {
@@ -18,7 +18,7 @@ export async function getAllScenariosForCase(url, id) {
 }
 
 /**
- * @param {import("@vcmap/ui").VcsUiApp} app 
+ * @param {import("@vcmap/ui").VcsUiApp} app
  * @param {Object} scenarioConfig - configuration object of a scenario
  */
 export async function loadScenario(app, scenarioConfig) {

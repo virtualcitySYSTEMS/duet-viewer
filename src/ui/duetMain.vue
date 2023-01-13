@@ -57,16 +57,16 @@
   </div>
 </template>
 <script>
-  import { inject, ref, computed, reactive } from 'vue';
   import { WindowSlot } from '@vcmap/ui';
+  import { computed, inject, reactive, ref } from 'vue';
   import {
-    VContainer, VCol, VRow, VHover, VCard, VAvatar, VIcon, VCardTitle, VCardActions, VCardSubtitle,
+    VAvatar, VCard, VCardActions, VCardSubtitle, VCardTitle, VCol, VContainer, VHover, VIcon, VRow,
   } from 'vuetify/lib';
-  import login from './login.vue';
-  import EmptyComponent from './emptyComponent.vue';
   import duetCaseSelector, { windowId } from './duetCaseSelector.vue';
-  import duetScenarioSelector, { windowScenarioId } from './duetScenarioSelector.vue';
   import duetExperimentSelector, { windowExpId } from './duetExperimentsSelector.vue';
+  import duetScenarioSelector, { windowScenarioId } from './duetScenarioSelector.vue';
+  import EmptyComponent from './emptyComponent.vue';
+  import login from './login.vue';
 
   const showTestClass = ref(false);
   export const windowMainId = 'duetMain-id';
@@ -79,9 +79,11 @@
       VContainer, VCol, VRow, VHover, VCard, VAvatar, VIcon, VCardTitle, VCardActions, VCardSubtitle,
     },
     mounted() {
+      // adding SOCKjs as script to plugin => needs to be replaced via correct npm module
       const sockScript = document.createElement('script');
       sockScript.setAttribute('src', 'https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js');
       document.head.appendChild(sockScript);
+      // adding Stomp.js as script to the plugin => needs to be replaced by correct npm module
       const stompScript = document.createElement('script');
       stompScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js');
       document.head.appendChild(stompScript);

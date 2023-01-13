@@ -1,11 +1,27 @@
 # duetviewer
+
 This plugin will be based on new vc map ui and core. It will mainly display duet cases, scenarios and experiments in new vc map.
 The intention of that viewer is not to recreate the full capabilities of the viewer developed during the DUET project. The here published viewer shows how VC Core & VC MAP UI can be used for further developments based on DUET'S backend components.
 
 Thus the used configuration of that plugin relates to DUET services / backend components, even if they are not used in this viewer here.
 
-## config.json
+## Developer intro
 
+```
+git clone https://github.com/virtualcitySYSTEMS/duet-viewer
+npm i
+npm start
+```
+
+Information about VC Core can be found here [VC Core](https://github.com/virtualcitySYSTEMS/map-core).
+
+Information about VC MAP UI can be found here [VC MAP UI](https://github.com/virtualcitySYSTEMS/map-ui).
+
+Information about VC Plugin CLI can be found here [VC Plugin CLI](https://github.com/virtualcitySYSTEMS/map-plugin-cli).
+
+## Plugin configuration via config.json
+
+```
 {
     "name": "duetviewer", // name of the plugin
     "version": "1.0.0", // version of the plugin
@@ -76,3 +92,5 @@ Thus the used configuration of that plugin relates to DUET services / backend co
         "type": "error"     //type of model
         }
     ]
+}
+```

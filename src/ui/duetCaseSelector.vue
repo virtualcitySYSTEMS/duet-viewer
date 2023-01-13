@@ -77,17 +77,18 @@
 </template>
 
 <script>
-  import { inject, ref, computed } from 'vue';
+  import { computed, inject, ref } from 'vue';
   import {
+    VAvatar, VCard,
     // eslint-disable-next-line max-len
-    VContainer, VList, VListItem, VListItemAction, VListItemTitle, VListItemSubtitle, VListItemContent, VCard, VAvatar, VIcon, VPagination,
+    VContainer, VIcon, VList, VListItem, VListItemAction, VListItemContent, VListItemSubtitle, VListItemTitle, VPagination,
   } from 'vuetify/lib';
+  import { removeDuetLayers } from '../duet-api/duetAPI.js';
   import { getCasesFromManager, loadCase } from '../duet-api/duetCases.js';
-  import { getAllScenariosForCase } from '../duet-api/duetScenario.js';
   import { getAllExperimentsForCase } from '../duet-api/duetExperiment.js';
+  import { getAllScenariosForCase } from '../duet-api/duetScenario.js';
   import dueterror from '../duet-api/errorlogging.js';
   import validateConfig from '../duet-api/getPluginConf.js';
-  import { removeDuetLayers } from '../duet-api/duetAPI.js';
 
   export const windowId = 'duetCaseSelector-id';
 
@@ -109,6 +110,10 @@
       const pages = ref();
 
       const { config } = plugin;
+      /**
+       *
+       * @param {number} index - index of page to be fetched
+       */
       async function callCaseManager(index) {
         const data = await getCasesFromManager(config.casesURL, index); // 'https://services.citytwin.eu/cases-dev/',index)
         if (data) {
@@ -124,6 +129,10 @@
       } else {
         dueterror.addError({ function: 'DuetCaseSelector()', message: 'Provided plugin config is invalid. Please correct it.' }, 3);
       }
+      /**
+       *
+       * @param {Object} selectedCase - config object of selected case
+       */
       async function selectCase(selectedCase) {
         removeDuetLayers(app);
         if (Object.keys(activeCase.value).length !== 0) {
@@ -153,7 +162,8 @@
           plugin.state.scenarioId.value = 0;
           plugin.state.experimentId.value = 0;
           plugin.state.case.value = selectedCase;
-          loadCase(app, config, selectedCase, plugin.state.credentials.value.accessToken);
+          await loadCase(app, config, selectedCase, plugin.state.credentials.value.accessToken);
+          dueterror.addError({ function: 'selectCase() in duetCaseSelector', message: `Case with id:${selectedCase.id } successfully loaded` }, 1);
           plugin.state.scenarios.value = await getAllScenariosForCase(config.scenarioURL, selectedCase.id);
           if (plugin.state.scenarios.value.length > 0) {
             dueterror.addError({ function: 'selectCase() in duetCaseSelector', message: `${plugin.state.scenarios.value.length } scenarios found for case: ${selectedCase.id}` }, 1);

@@ -1,6 +1,6 @@
-import { viewpointLoader, layerLoader, styleLoader } from './loaders.js';
 import { removeDuetLayers, setUsedStyleForDuetLayer } from './duetAPI.js';
 import { initialize } from './kafkaConnector.js';
+import { layerLoader, styleLoader, viewpointLoader } from './loaders.js';
 
 /**
  * @typedef {Object} cases

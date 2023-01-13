@@ -1,5 +1,6 @@
-duetviewer/vcm/
-duetviewer/node_modules/
-duetviewer/dist/
-duetviewer/build/
-duetviewer/plugins/
+vcm/
+node_modules/
+dist/
+build/
+plugins/
+node_modules

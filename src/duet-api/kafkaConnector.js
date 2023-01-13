@@ -4,9 +4,9 @@ import { tnoModelResultLoader } from './loaders.js';
 let stompClient = null;
 
 /**
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
- * @param {Object} msg - received message from message broker 
- * @param {string} topic - topic of incomming message 
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
+ * @param {Object} msg - received message from message broker
+ * @param {string} topic - topic of incomming message
  */
 async function genericMessage(app, msg, topic) {
   const plugin = app.plugins.getByKey('duetviewer');
@@ -31,8 +31,8 @@ async function genericMessage(app, msg, topic) {
 }
 
 /**
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
- * @returns available topics defined by plugin config
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
+ * @returns {Array} available topics defined by plugin config
  */
 function initializeTopics(app) {
   const plugin = app.plugins.getByKey('duetviewer');
@@ -55,7 +55,7 @@ function initializeTopics(app) {
 /**
  * @param {Array<Objects>} availabletopics - array of topics from config
  * @param {string} region - pilot / region defined by case / scenario
- * @returns traffic topics for region
+ * @returns  {Array} traffic topics for region
  */
 function getTrafficTopics(availabletopics, region) {
   return availabletopics.traffic.filter(el => (el.region === region || el.region === 'all'));
@@ -64,7 +64,7 @@ function getTrafficTopics(availabletopics, region) {
 /**
  * @param {Array<Objects>} availabletopics - array of topics from config
  * @param {string} region - pilot / region defined by case / scenario
- * @returns noise topics for region
+ * @returns  {Array} noise topics for region
  */
 function getNoiseTopics(availabletopics, region) {
   return availabletopics.noise.filter(el => (el.region === region || el.region === 'all'));
@@ -73,7 +73,7 @@ function getNoiseTopics(availabletopics, region) {
 /**
  * @param {Array<Objects>} availabletopics - array of topics from config
  * @param {string} region - pilot / region defined by case / scenario
- * @returns air topics for region
+ * @returns  {Array} air topics for region
  */
 function getAirTopics(availabletopics, region) {
   return availabletopics.air.filter(el => (el.region === region || el.region === 'all'));
@@ -82,7 +82,7 @@ function getAirTopics(availabletopics, region) {
 /**
  * @param {Array<Objects>} availabletopics - array of topics from config
  * @param {string} region - pilot / region defined by case / scenario
- * @returns control topics for region
+ * @returns  {Array} control topics for region
  */
 function getControlTopics(availabletopics, region) {
   return availabletopics.control.filter(el => (el.region === region || el.region === 'all'));
@@ -91,7 +91,7 @@ function getControlTopics(availabletopics, region) {
 /**
  * @param {Array<Objects>} availabletopics - array of topics from config
  * @param {string} region - pilot / region defined by case / scenario
- * @returns error topics for region
+ * @returns  {Array} error topics for region
  */
 function getErrorTopics(availabletopics, region) {
   return availabletopics.error.filter(el => (el.region === region || el.region === 'all'));
@@ -100,7 +100,7 @@ function getErrorTopics(availabletopics, region) {
 /**
  * @param {Array<Objects>} availabletopics - array of topics from config
  * @param {string} region - pilot / region defined by case / scenario
- * @returns misc topics for region (everything not being a ['traffic', 'noise', 'air', 'control', 'error'] topic)
+ * @returns {Array} misc topics for region (everything not being a ['traffic', 'noise', 'air', 'control', 'error'] topic)
  */
 function getMiscTopics(availabletopics, region) {
   // let miscTopics=[];
@@ -115,7 +115,7 @@ function getMiscTopics(availabletopics, region) {
 }
 
 /**
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
  * @param {Array<Objects>} devtopics - array with topics to subscribe to
  */
 export function getWebSocket(app, devtopics) {
@@ -175,7 +175,7 @@ export function getWebSocket(app, devtopics) {
 }
 
 /**
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
  * @param {string} pilot - region or pilot name
  */
 export async function initialize(app, pilot) {

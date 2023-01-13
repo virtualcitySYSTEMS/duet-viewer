@@ -3,15 +3,15 @@ import { DeclarativeStyleItem, StaticGeoJSONTileProvider, VectorTileLayer, Viewp
 import {
   activateDuetLayers, addContentTreeEntry, addNodeContentTreeEntry, createDeltaLayer,
   // eslint-disable-next-line max-len
-  createLayerDefinition, setStyleForLoadedLayer, tnoPayloadPublisher
+  createLayerDefinition, setStyleForLoadedLayer, tnoPayloadPublisher,
 } from './duetAPI.js';
 import dueterror from './errorlogging.js';
 import lineOffsetter from './lineOffsetter.js';
 
 /**
  * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
- * @param {Number} x - x coordinate of case / scenario
- * @param {Number} y - coordinate of case / scenario
+ * @param {number} x - x coordinate of case / scenario
+ * @param {number} y - coordinate of case / scenario
  * @param {Object} config - configuration object of case or scenario
  */
 export async function viewpointLoader(app, x, y, config = {}) {
@@ -70,9 +70,9 @@ export async function viewpointLoader(app, x, y, config = {}) {
 }
 
 /**
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
- * @param {Object} config - style configuration object of case or scenario 
- * @returns 
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
+ * @param {Object} config - style configuration object of case or scenario
+ * @returns {Promise}
  */
 export async function styleLoader(app, config = {}) {
   const promises = await Promise.all(Object.keys(config).map(async (key) => {
@@ -86,8 +86,8 @@ export async function styleLoader(app, config = {}) {
 
 /**
  * delays for given milliseconds
- * @param {number} milliseconds 
- * @returns 
+ * @param {number} milliseconds
+ * @returns {Promise}
  */
 function delay(milliseconds) {
   return new Promise((resolve) => {
@@ -97,7 +97,7 @@ function delay(milliseconds) {
 
 /**
  * creates WMTS layer for tno sim results
- * @param {string} key - url key property 
+ * @param {string} key - url key property
  * @param {string} url - url to tno service
  * @param {string} id - id of simulation scenario
  * @param {Array<number>} bbox - array of 4 number defining the [minx,miny,maxx,maxy] extent of WMTS region
@@ -149,11 +149,11 @@ async function createTnoWMTS(key, url, id, bbox, type) {
 }
 
 /**
- * 
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
+ *
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
  * @param {Object} object - payload object of tno sim result service
- * @param {string} type - type of simulation (air, noise) 
- * @returns promise
+ * @param {string} type - type of simulation (air, noise)
+ * @returns {Promise} promise
  */
 export async function tnoModelResultLoader(app, object, type) {
   const plugin = app.plugins.getByKey('duetviewer');
@@ -176,7 +176,7 @@ export async function tnoModelResultLoader(app, object, type) {
 
 /**
  * creates WMTS layer for vito sim results
- * @param {string} key - url key property 
+ * @param {string} key - url key property
  * @param {string} url - url to tno service
  * @param {string} id - id of simulation scenario
  * @param {Array<number>} bbox - array of 4 number defining the [minx,miny,maxx,maxy] extent of WMTS region
@@ -228,12 +228,12 @@ async function createVitoWMTS(key, url, id, bbox, type) {
 }
 
 /**
- * 
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
- * @param {Object} object - object of vito pollutant 
- * @param {string} type - type of simulation (type=air) 
+ *
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
+ * @param {Object} object - object of vito pollutant
+ * @param {string} type - type of simulation (type=air)
  * @param {string} scenarioid - id of simulation scenario
- * @returns promise
+ * @returns {Promise} promise
  */
 async function vitoModelPollutantResultLoader(app, object, type, scenarioid) {
   const plugin = app.plugins.getByKey('duetviewer');
@@ -256,10 +256,10 @@ async function vitoModelPollutantResultLoader(app, object, type, scenarioid) {
 
 /**
  * creates WMTS layer for each pollutant of vito siulation results
- * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used 
- * @param {Object} object - payload object of vito sim result service 
- * @param {string} type - type of simulation (type=air) 
- * @returns promise
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
+ * @param {Object} object - payload object of vito sim result service
+ * @param {string} type - type of simulation (type=air)
+ * @returns {Promise}  promise
  */
 export async function vitoModelResultLoader(app, object, type) {
   addNodeContentTreeEntry(app, 'simresults.air', `air pollution results for ${ object.scenarioid}`);
@@ -297,11 +297,11 @@ function addBaselayer(url, name, type) {
 }
 
 /**
- * 
- * @param {Object} hash - object of objetcs containing the simulation results
- * @param {*} name 
- * @param {*} layer 
- * @returns 
+ *
+ * @param {Object} hash - object of objects (id of feature) containing the simulation results provided by sim result message
+ * @param {string} name - name of the layer
+ * @param {import("@vcmap/core").Layer} layer - VectorTiles Layer to apply the sim results to
+ * @returns {import("@vcmap/core").Layer}
  */
 async function createResultlayer(hash, name, layer) {
   return layer.activate().then(() => {
@@ -324,6 +324,11 @@ async function createResultlayer(hash, name, layer) {
   });
 }
 
+/**
+ * creates an object of objects with id of feature as key and sim results as value
+ * @param {Array<Objects>} changes - array of sim results
+ * @returns {Object} Object
+ */
 async function createHashMap(changes) {
   const testFeature = changes[0];
   const idKey = Object.keys(testFeature).find(key => (key.toLowerCase().includes('id') && !key.toLowerCase().includes('to_node_id') && !key.toLowerCase().includes('from_node_id')));
@@ -337,6 +342,14 @@ async function createHashMap(changes) {
   return Promise.resolve(hash);
 }
 
+/**
+ * loads all layers from a list of used datasources defined in a case or scenario
+ * @param {import("@vcmap/ui").VcsUiApp} app - VCS app to be used
+ * @param {string} url - url to Duet catalog service
+ * @param {string} token - security token fetched from DUET login
+ * @param {Array<string>} layers - array of strings naming the datasource identifiers of DUET catalog to be loaded
+ * @returns {Array<promises>} - promise is either string or VCS layer
+ */
 export async function layerLoader(app, url, token, layers = []) {
   let source;
   if (layers.length !== 0) {

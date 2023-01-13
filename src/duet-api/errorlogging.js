@@ -28,7 +28,7 @@ export class DuetError {
   }
 
   /**
-     * @param {Object} object - object to be placed in errorList / or to be sent to error service 
+   * @param {Object} object - object to be placed in errorList / or to be sent to error service
    * @param {number} loglevel - level of error (1=info; 2=warning; 3=error)
    */
   addError(object, loglevel) {
@@ -42,7 +42,7 @@ export class DuetError {
   }
 
   /**
-     * @returns the list of errors logged until request
+   * @returns {Array} the list of errors logged until request
    */
   getAllErrors() {
     return this.errorList;

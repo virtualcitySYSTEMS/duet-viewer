@@ -1,17 +1,17 @@
 import {
-  TerrainLayer,
   CesiumTilesetLayer,
   GeoJSONLayer,
-  WMSLayer,
-  TMSLayer,
-  WMTSLayer,
-  VectorTileLayer,
-  PointCloudLayer,
   MVTTileProvider,
-  StaticGeoJSONTileProvider,
   parseGeoJSON,
+  PointCloudLayer,
+  StaticGeoJSONTileProvider,
+  TerrainLayer,
+  TMSLayer,
+  VectorTileLayer,
+  WMSLayer,
+  WMTSLayer,
 } from '@vcmap/core';
-import { LayerContentTreeItem, NodeContentTreeItem, getPluginAssetUrl } from '@vcmap/ui';
+import { getPluginAssetUrl, LayerContentTreeItem, NodeContentTreeItem } from '@vcmap/ui';
 
 
 /**
@@ -371,16 +371,24 @@ export function removeContentTreeItems(app) {
  * @param {string} type - either empty or 'simresults'
  */
 export function removeDuetLayers(app, type = '') {
-  const layers = Array.from(app.layers).filter((el) => {
-    if (Object.hasOwn(el.properties, 'duetType')) {
-      if (!type && el.properties.duetType.toLowerCase().includes(type)) {
-        return el;
-      } else {
+  let layers;
+  if (type !== '') {
+    layers = Array.from(app.layers).filter((el) => {
+      if (Object.hasOwn(el.properties, 'duetType')) {
+        if (el.properties.duetType.toLowerCase().includes(type)) {
+          return el;
+        }
+      }
+      return false;
+    }).map(el => el.name);
+  } else {
+    layers = Array.from(app.layers).filter((el) => {
+      if (Object.hasOwn(el.properties, 'duetType')) {
         return el;
       }
-    }
-    return false;
-  }).map(el => el.name);
+      return false;
+    }).map(el => el.name);
+  }
 
   const legends = Array.from(app.contentTree);
   layers.forEach((layer) => {

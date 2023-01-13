@@ -58,12 +58,13 @@
 </template>
 
 <script>
-  import { inject, computed } from 'vue';
+  import { computed, inject } from 'vue';
   import {
-    VContainer, VRow, VCard, VTimeline, VTimelineItem, VCardText, VCardTitle, VCardSubtitle, VBtn, VChip,
+    VBtn, VCard, VCardSubtitle, VCardText, VCardTitle, VChip, VContainer, VRow, VTimeline, VTimelineItem,
   } from 'vuetify/lib';
-  import { loadExperiment } from '../duet-api/duetExperiment.js';
   import { removeDuetLayers } from '../duet-api/duetAPI.js';
+  import { loadExperiment } from '../duet-api/duetExperiment.js';
+  import dueterror from '../duet-api/errorlogging.js';
 
   export const windowExpId = 'duetExpSelector-id';
 
@@ -90,6 +91,10 @@
       const selectedCase = computed(() => (plugin.state.caseId.value));
       const selectedScenario = computed(() => (plugin.state.scenarioId.value));
       const activeExperiment = computed(() => (plugin.state.experiment.value));
+      /**
+       *
+       * @param {Object} selectedExperiment - config object from selected experiment (fetched from DUET experiment service)
+       */
       async function selectExperiment(selectedExperiment) {
         removeDuetLayers(app, 'simresults');
         if (activeExperiment.value._id === selectedExperiment._id) {
@@ -99,7 +104,8 @@
           // activeExperiment.value=selectedExperiment.id;
           plugin.state.experiment.value = selectedExperiment;
           plugin.state.experimentId.value = selectedExperiment.title;
-          loadExperiment(app, selectedExperiment);
+          await loadExperiment(app, selectedExperiment);
+          dueterror.addError({ function: 'selectExperiment()', message: `Experiment ${selectedExperiment._id} successfully loaded` }, 1);
         }
       }
       return {

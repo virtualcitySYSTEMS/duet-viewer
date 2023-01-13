@@ -2,9 +2,9 @@ import * as turf from '@turf/turf';
 import GeoJSON from 'ol/format/GeoJSON.js';
 
 /**
- * 
+ * takes a set of ol line features overlaying each other and displaces the in drawin direction by 2 meters
  * @param {Object} olFeatures - either an array or an object containing openlayer features
- * @returns offsetted openlayers features
+ * @returns {Array<Object>} offsetted openlayers features
  */
 export default async function lineOffsetter(olFeatures) {
   let features;
